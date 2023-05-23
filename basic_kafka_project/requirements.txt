@@ -1,0 +1,13 @@
+kafka-python==1.4.6
+confluent_kafka
+requests
+avro
+faust
+fastavro
+pandas
+sqlalchemy
+psycopg2-binary
+df2gspread==1.0.4
+gspread==5.5.0
+gspread_dataframe==3.3.0
+oauth2client==4.1.3
