@@ -1,7 +1,7 @@
 from typing import Dict, List
 from json import loads
 from kafka import KafkaConsumer
-from sheet_connect import append_new_data, get_connect_sheet
+from sheet_connect import append_new_data
 
 from schema import Ride
 
