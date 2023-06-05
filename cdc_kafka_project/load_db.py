@@ -1,5 +1,5 @@
 import pandas as pd
-from sqlalchemy import create_engine
+import psycopg2 
 import csv
 from time import ctime, sleep
 
@@ -11,15 +11,20 @@ ext = csv.reader(file_object)
 header = next(ext)
 
 #make a connection to the database
-engine = create_engine(f"postgresql://{'root'}:{'root'}@{'localhost'}:{5432}/{'test_db'}")
+conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=5433 password='postgres'")
+curr = conn.cursor()
+print('here')
 
 #simulating real time data transfer to DB
 for row in ext:
-	df_row = pd.DataFrame([row], columns = header)
-	print(df_row)
-	df_row.to_sql('transactions', engine, if_exists='append', index=False)
-	print(f'committed to db at: {ctime()}')
+	curr.execute(
+            "INSERT INTO public.transactions (date, customer_id, payment_method, delivery_status, duration, orders, amount) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (row[0], row[1], row[2], row[3], row[4], row[5], row[6]),)
+	#print(df_row)
 	sleep(15)
+	conn.commit()
+	print(f'committed to db at: {ctime()}')
+curr.close()
 
 
 
