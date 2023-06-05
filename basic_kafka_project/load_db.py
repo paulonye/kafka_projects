@@ -11,13 +11,13 @@ ext = csv.reader(file_object)
 header = next(ext)
 
 #make a connection to the database
-engine = create_engine(f"postgresql://{'root'}:{'root'}@{'localhost'}:{5432}/{'test_db'}")
+#engine = create_engine(f"postgresql://{'root'}:{'root'}@{'localhost'}:{5432}/{'test_db'}")
 
 #simulating real time data transfer to DB
 for row in ext:
 	df_row = pd.DataFrame([row], columns = header)
 	print(df_row)
-	df_row.to_sql('transactions', engine, if_exists='append', index=False)
+	#df_row.to_sql('transactions', engine, if_exists='append', index=False)
 	print(f'committed to db at: {ctime()}')
 	sleep(15)
 
