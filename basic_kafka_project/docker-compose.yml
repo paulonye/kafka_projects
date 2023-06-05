@@ -88,7 +88,7 @@ services:
     container_name: datagen
     entrypoint:
       - python
-      - ./container/producer/producer.py
+      - ./container/app/producer.py
     volumes:
       - .:/opt/producer
     depends_on:
@@ -104,7 +104,7 @@ services:
       - GCP_KEY=/run/secrets/my_secret
     entrypoint:
       - python
-      - ./container/consumer/consumer.py
+      - ./container/app/consumer.py
     volumes:
       - .:/opt/consumer
     depends_on:
