@@ -6,7 +6,6 @@ from kafka.errors import KafkaTimeoutError
 from time import sleep
 from schema import Ride
 
-
 class JsonProducer(KafkaProducer):
     def __init__(self, props: Dict):
         self.producer = KafkaProducer(**props)
@@ -35,7 +34,7 @@ class JsonProducer(KafkaProducer):
 if __name__ == '__main__':
     # Config Should match with the KafkaProducer expectation
     config = {
-        'bootstrap_servers': ['localhost:9092'],
+        'bootstrap_servers': ['broker:9092'],
         'key_serializer': lambda key: str(key).encode(),
         'value_serializer': lambda x: json.dumps(x.__dict__, default=str).encode('utf-8')
     }

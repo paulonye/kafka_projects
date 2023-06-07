@@ -1,6 +1,8 @@
 """This python file sets up a secured connection
     to the script"""
 
+#personal@sendme-test-db.iam.gserviceaccount.com
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import df2gspread as d2g
@@ -10,6 +12,7 @@ import pandas as pd
 
 #import environment variable
 key_file = os.getenv('GCP_KEY')
+#key_file = 'sendme-test-db-8bb289d0fb7a.json'
 
 # defining the scope of the application
 scope_app = ['https://www.googleapis.com/auth/drive',
@@ -25,11 +28,14 @@ def get_connect_sheet():
 
     return client
 
-def push_to_sheets(sheet: str, df):
+def push_to_sheets(sheet: str, sheet_name:str, df):
     '''This function takes in the sheet and the
     dataframe'''
-    sheet.clear()
-    set_with_dataframe(worksheet=sheet, dataframe=df, include_index=False,
+    
+    client = get_connect_sheet().open(sheet).worksheet(sheet_name)
+
+    client.clear()
+    set_with_dataframe(worksheet=client, dataframe=df, include_index=False,
                        include_column_header=True, resize=True)
 
 

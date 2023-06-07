@@ -32,7 +32,7 @@ class JsonConsumer:
 
 if __name__ == '__main__':
     config = {
-        'bootstrap_servers': ['localhost:9092'],
+        'bootstrap_servers': ['broker:9092'],
         'auto_offset_reset': 'earliest',
         'enable_auto_commit': True,
         'key_deserializer': lambda key: str(key.decode('utf-8')),
