@@ -1,6 +1,7 @@
 import csv
 import json
 from typing import List, Dict
+from os.path import join, dirname, realpath
 from kafka import KafkaProducer
 from kafka.errors import KafkaTimeoutError
 from time import sleep
@@ -13,7 +14,9 @@ class JsonProducer(KafkaProducer):
     @staticmethod
     def read_records(resource_path: str):
         records = []
-        with open(resource_path, 'r') as f:
+        file_path = dirname(realpath(__file__))
+        dir_path = join(file_path, resource_path)
+        with open(dir_path, 'r') as f:
             reader = csv.reader(f)
             header = next(reader)  # skip the header row
             for row in reader:
