@@ -115,4 +115,4 @@ services:
 
 secrets:
   my_secret:
-    file: ~/.service_account/sendme-test-db-8bb289d0fb7a.json
+    file: ~/.service_account/sendme-test-db-d28e6fd36df1.json
